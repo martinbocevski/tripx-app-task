@@ -3,9 +3,9 @@ import LoginForm from "@/components/LoginForm";
 
 export default function Home() {
   return (
-    <main>
-      <div className="loginBlock">
-        <h1 className="H1">TripX Login</h1>
+    <main className="login-main">
+      <div className="login-block">
+        <h1 className="h1">TripX Login</h1>
 
         <LoginForm />
       </div>

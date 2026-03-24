@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { isUserAuthenticated } from "@/lib/login";
+import DestinationsList from "@/components/DestinationsList";
 
 export default function DestionationsPage() {
   const router = useRouter();
@@ -25,9 +26,11 @@ export default function DestionationsPage() {
 
   return (
     <main>
-      <div className="destionationsHeadline">
-        <h1 className="H1">Destinations</h1>
+      <div className="destionations-headline">
+        <h1>Destinations</h1>
       </div>
+
+      <DestinationsList />
     </main>
   );
 }

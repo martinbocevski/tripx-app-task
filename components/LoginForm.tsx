@@ -65,7 +65,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       {message && <p>{message}</p>}
 
       {isLocked && <p>Try again in {lockTime} seconds</p>}
@@ -86,7 +86,10 @@ export default function LoginForm() {
         disabled={isLocked || loading}
       />
 
-      <button disabled={isLocked || loading}>
+      <button
+        className="primary-button rounded-xl"
+        disabled={isLocked || loading}
+      >
         {loading ? "Loading..." : "Login"}
       </button>
     </form>
