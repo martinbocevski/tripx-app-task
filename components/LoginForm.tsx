@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { login } from "@/lib/login";
 
 export default function LoginForm() {
@@ -28,7 +28,7 @@ export default function LoginForm() {
     }
   }, [lockTime]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isLocked || loading) return;
