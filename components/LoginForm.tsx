@@ -16,6 +16,8 @@ export default function LoginForm() {
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [lockTime, setLockTime] = useState(0);
 
+  const [bookingCode, setBookingCode] = useState("");
+
   const isLocked = lockTime > 0;
 
   useEffect(() => {
@@ -25,6 +27,12 @@ export default function LoginForm() {
       }, 1000);
 
       return () => clearInterval(timer);
+    }
+  }, [lockTime]);
+
+  useEffect(() => {
+    if (lockTime === 0) {
+      setMessage("");
     }
   }, [lockTime]);
 
@@ -39,6 +47,10 @@ export default function LoginForm() {
     const result = await login(username, password);
 
     if (result.success) {
+      if (bookingCode) {
+        localStorage.setItem("booking_code", bookingCode);
+      }
+
       setFailedAttempts(0);
       router.push("/destinations");
       setLoading(false);
@@ -65,14 +77,23 @@ export default function LoginForm() {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      {message && <p>{message}</p>}
+    <form className="flex flex-col gap-5 w-full" onSubmit={handleSubmit}>
+      {message && (
+        <p className="bg-red-200 rounded-lg py-3 px-3 text-sm text-red-500">
+          {message}
+        </p>
+      )}
 
-      {isLocked && <p>Try again in {lockTime} seconds</p>}
+      {isLocked && (
+        <p className="bg-amber-100 rounded-lg py-3 px-3 text-sm text-amber-500">
+          Try again in {lockTime} seconds
+        </p>
+      )}
 
       <input
         type="text"
         placeholder="Username"
+        className="w-full py-4 px-4 text-lg border-[1] border-[#e6e6e6] rounded-xl"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         disabled={isLocked || loading}
@@ -81,13 +102,22 @@ export default function LoginForm() {
       <input
         type="password"
         placeholder="Password"
+        className="w-full py-4 px-4 text-lg border-[1] border-[#e6e6e6] rounded-xl"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         disabled={isLocked || loading}
       />
 
+      <input
+        type="text"
+        placeholder="Booking code (Optional)"
+        className="w-full py-4 px-4 text-lg border-[1] border-[#e6e6e6] rounded-xl"
+        value={bookingCode}
+        onChange={(e) => setBookingCode(e.target.value)}
+      />
+
       <button
-        className="primary-button rounded-xl"
+        className="bg-blue-500 text-white rounded-xl py-3.5 text-lg cursor-pointer"
         disabled={isLocked || loading}
       >
         {loading ? "Loading..." : "Login"}
