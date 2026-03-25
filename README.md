@@ -1,4 +1,6 @@
-### Frontend Task TripX
+# Frontend Task TripX
+
+This Project includes a Next.js app with a log in form that can be used to access a list of destinations.
 
 ## Features
 
