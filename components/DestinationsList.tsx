@@ -49,28 +49,29 @@ export default function DestinationsList() {
   });
 
   if (loading) {
-    return <p>Loading Destinations...</p>;
+    return <p className="text-base text-black">Loading Destinations...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className="text-base text-black">{error}</p>;
   }
 
   return (
-    <div className="destinations-list">
+    <div className="">
       <input
         type="text"
         placeholder="Search destinations"
         name="search"
         id="search"
+        className="w-full py-5 px-5 mb-8 text-base sm:text-xl border-[1] border-[#e6e6e6] rounded-2xl"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
       {filteredDestinations.length === 0 ? (
-        <p>No results found</p>
+        <p className="text-base text-black">No results found</p>
       ) : (
-        <div className="destinations-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredDestinations.map((item) => (
             <DestinationCard key={item.code} destination={item} />
           ))}

@@ -34,3 +34,7 @@ export async function login(username: string, password: string) {
 export function isUserAuthenticated() {
   return localStorage.getItem(AUTH_STORAGE_KEY) === "true";
 }
+
+export function clearAuthenticationSession() {
+  localStorage.removeItem(AUTH_STORAGE_KEY);
+}

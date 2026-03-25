@@ -6,21 +6,23 @@ type DestinationCardProps = {
 
 export default function DestinationCard({ destination }: DestinationCardProps) {
   return (
-    <article className="destination-card">
-      <figure className="image-wrapper">
+    <article className="rounded-xl overflow-hidden shadow-lg">
+      <figure className="h-[200] xl:h-[250] w-full">
         <img
           src={destination.thumbnail}
           alt={destination.name || "Destination image"}
-          className="destination-image"
+          className="h-full w-full object-cover"
         />
       </figure>
 
-      <div className="content">
-        <h3>{destination.name}</h3>
+      <div className="content flex flex-col py-5 px-5">
+        <h3 className="text-2xl font-semibold mb-4">{destination.name}</h3>
 
-        <div className="aditional-info">
-          <p>{destination.countHotels} hotels</p>
-          <p>{destination.countDestinations} destinations</p>
+        <div className="flex flex-col gap-1">
+          <p className="text-base">{destination.countHotels} hotels</p>
+          <p className="text-base">
+            {destination.countDestinations} destinations
+          </p>
         </div>
       </div>
     </article>
